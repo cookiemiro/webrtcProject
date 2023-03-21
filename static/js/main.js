@@ -9,6 +9,7 @@ let username;
 let peerUsername;
 let webSocket;
 
+// 소켓에서 받은 메시지
 function webSocketOnMessage(event) {
     console.log(event);
     let parsedData = JSON.parse(event.data);
@@ -48,6 +49,7 @@ function webSocketOnMessage(event) {
     }
 }
 
+// 소켓 연결
 btnJoin.addEventListener('click', () => {
     username = usernameInput.value;
     console.log(username)
@@ -96,6 +98,7 @@ btnJoin.addEventListener('click', () => {
     });
 });
 
+// 인스턴스를 하나 생성해놓고 미디어 디바이스를 찾아서 값을 할당한다.
 let localStream = new MediaStream();
 console.log(localStream);
 
@@ -112,7 +115,9 @@ const btnToggleVideo = document.querySelector('#btn-toggle-video');
 
 let userMedia = navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => {
+        console.log(stream);
         localStream = stream;
+        console.log(localStream);
         localVideo.srcObject = localStream;
         localVideo.muted = true;
 
@@ -153,6 +158,7 @@ let userMedia = navigator.mediaDevices.getUserMedia(constraints)
     .catch(error => {
         console.log('Error accessing media devices.', error);
     })
+console.log(userMedia);
 
 let btnSendMsg = document.querySelector('#btn-send-msg');
 let messageList = document.querySelector('#message-list');
